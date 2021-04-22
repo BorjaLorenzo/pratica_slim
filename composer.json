@@ -1,0 +1,7 @@
+{
+    "require": {
+        "slim/slim": "3.*",
+        "jenssegers/blade": "^1.4",
+        "slim/twig-view": "^2.5"
+    }
+}
