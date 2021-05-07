@@ -117,11 +117,12 @@ class Controlador
     }
     public function showBuscar(){
         if(Usuario::EsAdministrador()){
-            Controlador::getInstance()->cerrarSesion();
-            return $this->blade->render('login');
+            return $this->blade->render('buscador',['errores'=>[]]);
         }
         else{
-            return $this->blade->render('buscador',['errores'=>[]]);
+            
+            Controlador::getInstance()->cerrarSesion();
+            return $this->blade->render('login');
         } 
         
     }

@@ -10,47 +10,105 @@
 <form action="<?= BASE_URL ?>buscar" method="post">
     {{-- <input type="text" name="id" value="{{$id}}" style="visibility: hidden"> --}}
     <div class="row">
-        <div class="col s4 offset-s4">
-            Fecha creacion:
-            <input type="date" name="fechaI">
+        <div class="col offset-s2">
+            Opcion 1:
+            <input type="text" name="op1">
             
         </div>
         <div class="col">
-            <label for="">Valor: <select name="valorI" id="">
+            <label for="">Valor: <select name="vop1" id="">
                 <option value="=">=</option>
                 <option value=">">></option>
                 <option value="<"><</option>
             </select></label>
         </div>
+        <div class="col">
+            <label for="">Seccion: <select name="sop1" id="">
+                <option value="" selected></option>
+                <option value="id_operario">ID Operario</option>
+                <option value="nombre_contacto">Nombre</option>
+                <option value="apellidos_contacto">Apellidos</option>
+                <option value="telefono">Telefono</option>
+                <option value="descripcion">Descripcion</option>
+                <option value="email">Email</option>
+                <option value="direccion">Direccion</option>
+                <option value="poblacion">Poblacion</option>
+                <option value="codigo_postal">Codigo postal</option>
+                <option value="provincia">Provincia</option>
+                <option value="estado">Estado</option>
+                <option value="fecha_creacion">Fecha creacion</option>
+                <option value="fecha_realizacion">Fecha realizacion</option>
+                <option value="anotaciones_ANT">Anotaciones anteriores</option>
+                <option value="anotaciones_POST">Anotaciones posteriores</option>
+            </select></label>
+        </div>
     </div>
     <div class="row">
-        <div class="col s4 offset-s4">
-            Fecha realizacion:
-            <input type="date" name="fechaF" id="">
+        <div class="col offset-s2">
+            Opcion 2:
+            <input type="text" name="op2">
             
         </div>
         <div class="col">
-            <label for="">Valor: <select name="valorF" id="">
+            <label for="">Valor: <select name="vop2" id="">
                 <option value="=">=</option>
                 <option value=">">></option>
                 <option value="<"><</option>
             </select></label>
         </div>
+        <div class="col">
+            <label for="">Seccion: <select name="sop2" id="">
+                <option value="" selected></option>
+                <option value="id_operario">ID Operario</option>
+                <option value="nombre_contacto">Nombre</option>
+                <option value="apellidos_contacto">Apellidos</option>
+                <option value="telefono">Telefono</option>
+                <option value="descripcion">Descripcion</option>
+                <option value="email">Email</option>
+                <option value="direccion">Direccion</option>
+                <option value="poblacion">Poblacion</option>
+                <option value="codigo_postal">Codigo postal</option>
+                <option value="provincia">Provincia</option>
+                <option value="estado">Estado</option>
+                <option value="fecha_creacion">Fecha creacion</option>
+                <option value="fecha_realizacion">Fecha realizacion</option>
+                <option value="anotaciones_ANT">Anotaciones anteriores</option>
+                <option value="anotaciones_POST">Anotaciones posteriores</option>
+            </select></label>
+        </div>
     </div>
     <div class="row">
-        <div class=" col s4 offset-s4">
-            Provincia: 
-            <select name="provincia" id="provincia">
-                <option value="" selected disabled></option>
-                <option value="Huelva">Huelva</option>
-                <option value="Sevilla">Sevilla</option>
-                <option value="Cordoba">Cordoba</option>
-                <option value="Cadiz">Cadiz</option>
-                <option value="Jaen">Jaen</option>
-                <option value="Malaga">Malaga</option>
-                <option value="Almeria">Almeria</option>
-                <option value="Granada">Granada</option>
-            </select>
+        <div class="col offset-s2">
+            Opcion 3:
+            <input type="text" name="op3">
+            
+        </div>
+        <div class="col">
+            <label for="">Valor: <select name="vop3" id="">
+                <option value="=">=</option>
+                <option value=">">></option>
+                <option value="<"><</option>
+            </select></label>
+        </div>
+        <div class="col">
+            <label for="">Seccion: <select name="sop3" id="">
+                <option value="" selected></option>
+                <option value="id_operario">ID Operario</option>
+                <option value="nombre_contacto">Nombre</option>
+                <option value="apellidos_contacto">Apellidos</option>
+                <option value="telefono">Telefono</option>
+                <option value="descripcion">Descripcion</option>
+                <option value="email">Email</option>
+                <option value="direccion">Direccion</option>
+                <option value="poblacion">Poblacion</option>
+                <option value="codigo_postal">Codigo postal</option>
+                <option value="provincia">Provincia</option>
+                <option value="estado">Estado</option>
+                <option value="fecha_creacion">Fecha creacion</option>
+                <option value="fecha_realizacion">Fecha realizacion</option>
+                <option value="anotaciones_ANT">Anotaciones anteriores</option>
+                <option value="anotaciones_POST">Anotaciones posteriores</option>
+            </select></label>
         </div>
     </div>
     <div class="row">

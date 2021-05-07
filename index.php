@@ -6,7 +6,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 session_start();
 require 'vendor/autoload.php';
 require __DIR__.'/ctes.php';
-define('BASE_URL', 'http://localhost/projectos/php/pratica_slim/index.php/');
+define('BASE_URL', 'http://localhost/projectos/php/pratica_slim_G/index.php/');
 require 'controllers/Controlador.php';
 require 'controllers/C_Usuario.php';
 require 'controllers/C_Tareas.php';
@@ -137,6 +137,10 @@ $app->any('/buscadorOP', function (Request $req,  Response $res, $args = []) {
     return $res->getBody()->write(Controlador::getInstance()->showBuscarOP());
 });
 $app->any('/buscar', function (Request $req,  Response $res, $args = []) {
+    Usuario::SalirSiNoDentro();
+    return $res->getBody()->write(Controlador::getInstance()->Buscar());
+});
+$app->any('/confirmar', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
     return $res->getBody()->write(Controlador::getInstance()->Buscar());
 });

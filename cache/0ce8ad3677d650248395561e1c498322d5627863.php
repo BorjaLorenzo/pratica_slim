@@ -1,14 +1,14 @@
-@extends('_template')
-@section('errores')
-@foreach($errores as $error)
-@if($error!='')
-    <p>{{$error}}</p>
-@endif
-@endforeach
-@endsection
-@section('cuerpo')
+
+<?php $__env->startSection('errores'); ?>
+<?php $__currentLoopData = $errores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php if($error!=''): ?>
+    <p><?php echo e($error); ?></p>
+<?php endif; ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('cuerpo'); ?>
 <form action="<?= BASE_URL ?>buscar" method="post">
-    {{-- <input type="text" name="id" value="{{$id}}" style="visibility: hidden"> --}}
+    
     <div class="row">
         <div class="col offset-s2">
             Opcion 1:
@@ -117,7 +117,8 @@
         </div>
     </div>
 </form>
-@section('pie')
-    <a href="<?= BASE_URL ?>menuOP?id_operario={{$id}}" class="waves-effect waves-light btn-large">Volver al menu</a>
-@endsection
-@endsection
+<?php $__env->startSection('pie'); ?>
+    <a href="<?= BASE_URL ?>menuOP?id_operario=<?php echo e($id); ?>" class="waves-effect waves-light btn-large">Volver al menu</a>
+<?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\projectos\php\pratica_slim_G\view/buscadorOP.blade.php ENDPATH**/ ?>
