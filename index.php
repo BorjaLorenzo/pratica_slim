@@ -142,6 +142,6 @@ $app->any('/buscar', function (Request $req,  Response $res, $args = []) {
 });
 $app->any('/confirmar', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
-    return $res->getBody()->write(Controlador::getInstance()->Buscar());
+    return $res->getBody()->write(C_Tareas::getInstance()->ShowConfirmar());
 });
 $app->run();

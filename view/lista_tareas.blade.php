@@ -29,7 +29,7 @@
             <tr>
                 <td>
                     <a href="<?=BASE_URL?>modificarTarea?id_tarea={{$tarea["id"]}}" class="waves-effect waves-light btn-large">Modificar</a>
-                    <a href="<?=BASE_URL?>borrarTarea?id_tarea={{$tarea["id"]}}" class="waves-effect waves-light btn-large">Eliminar</a>
+                    <a href="<?=BASE_URL?>confirmar?id_tarea={{$tarea["id"]}}" class="waves-effect waves-light btn-large">Eliminar</a>
                 </td>
                 <td>{{$tarea["id"]}}</td>
                 <td>{{$tarea["id_operario"]}}</td>

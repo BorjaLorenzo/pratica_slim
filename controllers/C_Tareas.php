@@ -217,4 +217,7 @@ class C_Tareas
             return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $op]);
         }
     }
+    public function ShowConfirmar(){
+        return $this->blade->render('confirmar_eliminar',['id_tarea'=>$_GET['id_tarea']]);
+    }
 }

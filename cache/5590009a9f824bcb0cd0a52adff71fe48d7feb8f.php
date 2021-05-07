@@ -29,7 +29,7 @@
             <tr>
                 <td>
                     <a href="<?=BASE_URL?>modificarTarea?id_tarea=<?php echo e($tarea["id"]); ?>" class="waves-effect waves-light btn-large">Modificar</a>
-                    <a href="<?=BASE_URL?>borrarTarea?id_tarea=<?php echo e($tarea["id"]); ?>" class="waves-effect waves-light btn-large">Eliminar</a>
+                    <a href="<?=BASE_URL?>confirmar?id_tarea=<?php echo e($tarea["id"]); ?>" class="waves-effect waves-light btn-large">Eliminar</a>
                 </td>
                 <td><?php echo e($tarea["id"]); ?></td>
                 <td><?php echo e($tarea["id_operario"]); ?></td>
