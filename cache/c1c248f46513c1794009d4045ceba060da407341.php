@@ -1,8 +1,8 @@
-@extends('_template')
-@section('errores')
+
+<?php $__env->startSection('errores'); ?>
     <p>Menu de Administradores</p>
-@endsection
-@section('cuerpo')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('cuerpo'); ?>
 <div class="row">
     <div class="col s4"></div>
     <div class="col" class="flow-text">
@@ -21,15 +21,10 @@
         <a href="<?= BASE_URL ?>insertarUsuario" class="waves-effect waves-light btn-large">Agregar Usuario</a>
     </div>
 </div>
-<div class="row">
-    <div class="col s4"></div>
-    <div class="col" class="flow-text">
-        <a href="<?= BASE_URL ?>buscador" class="waves-effect waves-light btn-large">Buscador</a>
-    </div>
-</div>
 
         
-@endsection
-@section('pie')
-    <a href="<?= BASE_URL ?>cerrarSesion" class="waves-effect waves-light btn-large">Cerrar Sesion</a>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('pie'); ?>
+    <a href="<?= BASE_URL ?>" class="waves-effect waves-light btn-large">Cerrar Sesion</a>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\XAMPP\htdocs\projectos\php\pratica_slim\view/menu_adm.blade.php ENDPATH**/ ?>

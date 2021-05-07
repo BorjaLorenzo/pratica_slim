@@ -8,7 +8,7 @@ class Usuario{
         } else {
             $sql = "SELECT COUNT(*) AS encontrado FROM trabajadores WHERE id_trabajador='" . $user_id . "' AND pass ='" . $pass . "';";
             $resultado = $con->query($sql);
-            //var_dump(mysqli_error( $this->con ));
+            //var_dump(mysqli_error( $con ));
             if ($resultado && $resultado->num_rows == 1) {
                 $fila = $resultado->fetch_assoc();
                 if ($fila["encontrado"] == '1') {
@@ -49,5 +49,57 @@ class Usuario{
             header('Location: '.BASE_URL.'login');
             exit();
         }
+    }
+    public function getUsuario($id){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql = "SELECT * FROM trabajadores where id_trabajador='$id';";
+        $resultado = $con->query($sql);
+        $fila = $resultado->fetch_assoc();
+        return $fila;
+    }
+    public function getUsuarios(){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql = "SELECT * FROM trabajadores";
+        $registros = [];
+        $resultado = $con->query($sql) or die("Error->>" . mysqli_error($con));
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                array_push($registros, $fila);
+            }
+        }
+        return $registros;
+    }
+    public function insertarUsuario($nombre,$apellidos,$pass,$rol){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql = "INSERT INTO `trabajadores`( `pass`, `nombre`, `apellidos`, `rol`) VALUES ('$pass','$nombre','$apellidos','$rol');";
+        $con->query($sql) or die("Error en algunos de los campos->>" . mysqli_error($con));
+    }
+    public function modificarUsuario($id,$nombre,$apellidos,$pass,$rol){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql="UPDATE `trabajadores` SET `pass`='$pass',`nombre`='$nombre',`apellidos`='$apellidos',`rol`='$rol' WHERE `id_trabajador`='$id';";
+        $con->query($sql) or die("Error->>" . mysqli_error($con));
+    }
+    public function eliminarUsuario($id){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql = "DELETE FROM `trabajadores` where id_trabajador='$id';";
+        $con->query($sql) or die("Error->>" . mysqli_error($con));
+    }
+    public function getRol($id){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql = "SELECT * FROM `trabajadores` where id_trabajador='$id';";
+        $resultado = $con->query($sql) or die("Error->>" . mysqli_error($con));
+        $registro=[];
+        while ($fila = $resultado->fetch_assoc()) {
+            array_push($registro, $fila);
+        }
+        //var_dump($registro);
+        return $registro;
+    }
+    
+    
+    public function actualizarPass($pass,$id){
+        $con=BaseDatos::getInstance()->Conexion();
+        $sql="UPDATE `trabajadores` SET `pass`='$pass' WHERE `id_trabajador`='$id';";
+        $con->query($sql) or die("Error->>" . mysqli_error($con));
     }
 }

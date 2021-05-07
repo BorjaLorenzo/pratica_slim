@@ -13,7 +13,12 @@
         <a href="<?= BASE_URL ?>configuracionOP?id_operario={{$id}}" class="waves-effect waves-light btn-large">Configuracion</a>
     </div>
 </div>
-
+<div class="row">
+    <div class="col s4"></div>
+    <div class="col" class="flow-text">
+        <a href="<?= BASE_URL ?>buscadorOP" class="waves-effect waves-light btn-large">Buscador</a>
+    </div>
+</div>
         
 @endsection
 @section('pie')
