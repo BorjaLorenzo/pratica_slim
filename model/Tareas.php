@@ -69,6 +69,23 @@ class Tareas{
             }
         }
     }
+    public function CantidadRegistrosOP($id)
+    {
+        $con=BaseDatos::getInstance()->Conexion();
+
+        if ($con->connect_errno) {
+            return $con->connect_error;
+        } else {
+            $sql = "SELECT COUNT(*) AS total FROM tareas WHERE id_operario = '$id'";
+            $resultado = $con->query($sql);
+            if ($resultado->num_rows == 0) {
+                return 0;
+            } else {
+                $fila = $resultado->fetch_assoc();
+                return $fila["total"];
+            }
+        }
+    }
     public function RegistrosPaginados($limite1, $limite2)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -78,6 +95,26 @@ class Tareas{
             return $con->connect_error;
         } else {
             $sql = "SELECT * FROM tareas LIMIT " . $limite1 . "," . $limite2 . ";";
+            $resultado = $con->query($sql);
+            if ($resultado->num_rows == 0) {
+                return 0;
+            } else {
+                while ($fila = $resultado->fetch_assoc()) {
+                    array_push($registros, $fila);
+                }
+                return $registros;
+            }
+        }
+    }
+    public function RegistrosPaginadosOP($limite1, $limite2,$id)
+    {
+        $con=BaseDatos::getInstance()->Conexion();
+
+        $registros = [];
+        if ($con->connect_errno) {
+            return $con->connect_error;
+        } else {
+            $sql = "SELECT * FROM tareas where id_operario = '$id' LIMIT " . $limite1 . "," . $limite2 . " ;";
             $resultado = $con->query($sql);
             if ($resultado->num_rows == 0) {
                 return 0;

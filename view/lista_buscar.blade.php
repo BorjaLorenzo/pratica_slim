@@ -55,5 +55,6 @@
 </div>
 @endsection
 @section('pie')
+    
     <a href="<?= BASE_URL ?>menuADM" class="waves-effect waves-light btn-large">Volver al menu</a>
 @endsection

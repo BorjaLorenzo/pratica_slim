@@ -100,8 +100,7 @@ $app->any('/borrarUsuario', function (Request $req,  Response $res, $args = []) 
 });
 $app->any('/tablaTareasOperario', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
-    $test=$req->getParam('id_operario');
-    return $res->getBody()->write(C_Usuario::getInstance()->showTablaOperarios($test));
+    return $res->getBody()->write(C_Usuario::getInstance()->showTablaOperarios());
 });
 $app->any('/realizarTarea', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();

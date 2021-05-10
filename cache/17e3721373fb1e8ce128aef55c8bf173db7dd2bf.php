@@ -28,8 +28,8 @@
             <?php $__currentLoopData = $tareas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tarea): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
                 <td>
-                    <a href="<?=BASE_URL?>modificarTarea?id_tarea=<?php echo e($tarea["id"]); ?>" class="waves-effect waves-light btn-large">Modificar</a>
-                    <a href="<?=BASE_URL?>confirmar?id_tarea=<?php echo e($tarea["id"]); ?>" class="waves-effect waves-light btn-large">Eliminar</a>
+                    <a href="<?=BASE_URL?>realizarTarea?id_tarea=<?php echo e($tarea["id"]); ?>&id_operario=<?php echo e($id); ?>" class="waves-effect waves-light btn-large">Realizada</a>
+                    <a href="<?=BASE_URL?>cancelarTarea?id_tarea=<?php echo e($tarea["id"]); ?>&id_operario=<?php echo e($id); ?>" class="waves-effect waves-light btn-large">Cancelada</a>
                 </td>
                 <td><?php echo e($tarea["id"]); ?></td>
                 <td><?php echo e($tarea["id_operario"]); ?></td>
@@ -55,10 +55,10 @@
 </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('pie'); ?>
-    <?php $paginaUrl = "tablaTareas?";
+    <?php $paginaUrl = "tablaTareasOperario?";
         include_once "view\paginacion.blade.php";
     ?>
-    <a href="<?= BASE_URL ?>menuADM" class="waves-effect waves-light btn-large">Volver al menu</a>
+    <a href="<?= BASE_URL ?>menuOP?id_operario=<?php echo e($id); ?>" class="waves-effect waves-light btn-large">Volver al menu</a>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\projectos\php\pratica_slim_G\view/lista_tareas.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\projectos\php\pratica_slim_G\view/lista_tareas_op.blade.php ENDPATH**/ ?>

@@ -2,7 +2,7 @@
     <ul class='pagination'>
 
         <?php
-        $totalPaginas = ceil($totalFilas / $tareasPorPagina);
+        $totalPaginas = ceil($totalTareas / $tareasPorPagina);
         $paginaSiguiente = $pagina + 1;
         $paginaAnterior = $pagina - 1;
         $rango = 2;

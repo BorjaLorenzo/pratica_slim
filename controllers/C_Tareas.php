@@ -84,8 +84,19 @@ class C_Tareas
     public function ShowTabla()
     {
         if (Usuario::EsAdministrador()) {
-            $registros = $this->tarea->getArrayRegistrosTablaTarea();
-            return $this->blade->render('lista_tareas', ['tareas' => $registros]);
+            //$registros = $this->tarea->getArrayRegistrosTablaTarea();
+            $totalTareas = intval($this->tarea->CantidadRegistros());
+            $tareasPorPagina = 5;
+            $pagina = isset($_GET['page']) ? $_GET['page'] : 1;
+            $desde = ($tareasPorPagina * $pagina) - $tareasPorPagina;
+            $tareas = $this->tarea->RegistrosPaginados($desde, $tareasPorPagina);
+            return $this->blade->render('lista_tareas', compact(
+                'totalTareas',
+                'tareasPorPagina',
+                'pagina',
+                'desde',
+                'tareas'
+            ));
         } else {
             Controlador::getInstance()->cerrarSesion();
             return $this->blade->render('login');
@@ -217,7 +228,8 @@ class C_Tareas
             return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $op]);
         }
     }
-    public function ShowConfirmar(){
-        return $this->blade->render('confirmar_eliminar',['id_tarea'=>$_GET['id_tarea']]);
+    public function ShowConfirmar()
+    {
+        return $this->blade->render('confirmar_eliminar', ['id_tarea' => $_GET['id_tarea']]);
     }
 }

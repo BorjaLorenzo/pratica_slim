@@ -55,5 +55,8 @@
 </div>
 @endsection
 @section('pie')
+    <?php $paginaUrl = "tablaTareas?";
+        include_once "view\paginacion.blade.php";
+    ?>
     <a href="<?= BASE_URL ?>menuADM" class="waves-effect waves-light btn-large">Volver al menu</a>
 @endsection

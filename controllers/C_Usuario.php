@@ -6,6 +6,7 @@ include_once(HELPERS_PATH . 'GestorErrores.php');
 include_once(HELPERS_PATH . 'form.php');
 include_once(MODEL_PATH . 'BaseDatos.php');
 include_once(MODEL_PATH . 'Usuario.php');
+include_once(MODEL_PATH . 'Tareas.php');
 include_once(CTRL_PATH . 'Controlador.php');
 
 class C_Usuario
@@ -15,12 +16,13 @@ class C_Usuario
     protected $usuario = null;
     protected $errores = null;
     protected $paginador = null;
-
+    protected $tarea=null;
 
     public function __construct()
     {
         $this->model = new BaseDatos();
         $this->usuario = new Usuario();
+        $this->tarea=new Tareas();
         // El gestor solo sería necesario crearlo si editamos o insertamos
         // Inicializamos el gestor de errores que utilizaremos en la vista
         $this->errores = new GestorErrores(
@@ -128,11 +130,26 @@ class C_Usuario
             return $this->blade->render('login');
         }
     }
-    public function showTablaOperarios($id)
+    public function showTablaOperarios()
     {
         if (!Usuario::EsAdministrador()) {
-            $registros = $this->tarea->getTareasOperario($id);
-            return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $id]);
+            // $registros = $this->tarea->getTareasOperario($id);
+            // return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $id]);
+
+            $totalTareas = intval($this->tarea->CantidadRegistrosOP($_SESSION["usuario"]["id_trabajador"]));
+            $tareasPorPagina = 5;
+            $id=$_SESSION["usuario"]["id_trabajador"];
+            $pagina = isset($_GET['page']) ? $_GET['page'] : 1;
+            $desde = ($tareasPorPagina * $pagina) - $tareasPorPagina;
+            $tareas = $this->tarea->RegistrosPaginadosOP($desde, $tareasPorPagina,$_SESSION["usuario"]["id_trabajador"]);
+            return $this->blade->render('lista_tareas_op', compact(
+                'totalTareas',
+                'tareasPorPagina',
+                'pagina',
+                'desde',
+                'tareas',
+                'id'
+            ));
         } else {
             Controlador::getInstance()->cerrarSesion();
             return $this->blade->render('login');
