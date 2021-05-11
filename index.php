@@ -143,4 +143,18 @@ $app->any('/confirmar', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
     return $res->getBody()->write(C_Tareas::getInstance()->ShowConfirmar());
 });
+$app->any('/realizarTareaBuscar', function (Request $req,  Response $res, $args = []) {
+    Usuario::SalirSiNoDentro();
+    $test=$req->getParam('id_tarea');
+    return $res->getBody()->write(C_Tareas::getInstance()->realizarTareaBuscar($test));
+});
+$app->any('/cancelarTareaBuscar', function (Request $req,  Response $res, $args = []) {
+    Usuario::SalirSiNoDentro();
+    $test=$req->getParam('id_tarea');
+    return $res->getBody()->write(C_Tareas::getInstance()->cancelarTareaBuscar($test));
+});
+$app->any('/confirmarEliminarUsuario', function (Request $req,  Response $res, $args = []) {
+    Usuario::SalirSiNoDentro();
+    return $res->getBody()->write(C_Usuario::getInstance()->showConfirmarEliminar());
+});
 $app->run();

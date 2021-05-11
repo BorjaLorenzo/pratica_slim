@@ -1,12 +1,12 @@
 <?php
 class Tareas{
-    public static function buscarTodo($f_creacion,$f_realizacion,$provincia,$v_creacion,$v_realizacion){
+    public static function buscarTodo($op1,$vop1,$sop1,$op2,$vop2,$sop2,$op3,$vop3,$sop3){
         $con=BaseDatos::getInstance()->Conexion();
         $op=$_SESSION["usuario"]["id_trabajador"];
         if ($_SESSION["usuario"]["rol"]=='operario') {
-            $sql="SELECT * FROM `tareas` WHERE `fecha_creacion` $v_creacion '$f_creacion' AND `fecha_realizacion` $v_realizacion '$f_realizacion' and `provincia` ='$provincia' and `id_operario` ='$op';";
+            $sql="SELECT * FROM `tareas` WHERE $sop1 $vop1 '$op1' and $sop2 $vop2 '$op2' and $sop3 $vop3 '$op3' and `id_operario`='$op';";
         }else{
-            $sql="SELECT * FROM `tareas` WHERE `fecha_creacion` $v_creacion '$f_creacion' AND `fecha_realizacion` $v_realizacion '$f_realizacion' and `provincia` = '$provincia';";
+            $sql="SELECT * FROM `tareas` WHERE $sop1 $vop1 '$op1' and $sop2 $vop2 '$op2' and $sop3 $vop3 '$op3';";
         }
         $resultado = $con->query($sql) or die("Error->>" . mysqli_error($con));
         $registros = [];

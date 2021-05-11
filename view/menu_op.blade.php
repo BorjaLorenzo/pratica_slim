@@ -9,9 +9,9 @@
     <div class="col" class="flow-text">
         <a href="<?= BASE_URL ?>tablaTareasOperario?id_operario={{$id}}" class="waves-effect waves-light btn-large">Tabla de tareas</a>
     </div>
-    <div class="col" class="flow-text">
+    {{-- <div class="col" class="flow-text">
         <a href="<?= BASE_URL ?>configuracionOP?id_operario={{$id}}" class="waves-effect waves-light btn-large">Configuracion</a>
-    </div>
+    </div> --}}
 </div>
 <div class="row">
     <div class="col s4"></div>

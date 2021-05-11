@@ -28,8 +28,8 @@
             @foreach($tareas as $tarea)
             <tr>
                 <td>
-                    <a href="<?=BASE_URL?>modificarTarea?id_tarea={{$tarea["id"]}}" class="waves-effect waves-light btn-large">Modificar</a>
-                    <a href="<?=BASE_URL?>confirmar?id_tarea={{$tarea["id"]}}" class="waves-effect waves-light btn-large">Eliminar</a>
+                    <a href="<?=BASE_URL?>realizarTareaBuscar?id_tarea={{$tarea["id"]}}"class="waves-effect waves-light btn-large">Realizada</a>
+                    <a href="<?=BASE_URL?>cancelarTareaBuscar?id_tarea={{$tarea["id"]}}" class="waves-effect waves-light btn-large">Cancelada</a>
                 </td>
                 <td>{{$tarea["id"]}}</td>
                 <td>{{$tarea["id_operario"]}}</td>
@@ -55,6 +55,5 @@
 </div>
 @endsection
 @section('pie')
-    
-    <a href="<?= BASE_URL ?>menuADM" class="waves-effect waves-light btn-large">Volver al menu</a>
+    <a href="<?= BASE_URL ?>menuOP?id_operario={{$id}}" class="waves-effect waves-light btn-large">Volver al menu</a>
 @endsection

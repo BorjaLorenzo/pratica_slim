@@ -124,8 +124,8 @@ class C_Tareas
     {
         if (Usuario::EsAdministrador()) {
             $this->tarea->BorrarTarea($id);
-            $registros = $this->tarea->getArrayRegistrosTablaTarea();
-            return $this->blade->render('lista_tareas', ['tareas' => $registros]);
+            header('Location:tablaTareas');
+            exit;
         } else {
             Controlador::getInstance()->cerrarSesion();
             return $this->blade->render('login');
@@ -205,7 +205,6 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
-
     public function realizarTarea($id, $op)
     {
         if (Usuario::EsAdministrador()) {
@@ -213,8 +212,18 @@ class C_Tareas
             return $this->blade->render('login');
         } else {
             $this->tarea->actualizarEstado("Realizada", $id);
-            $registros = $this->tarea->getTareasOperario($op);
-            return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $op]);
+            header('Location:tablaTareasOperario');
+            exit;
+        }
+    }
+    public function realizarTareaBuscar($id)
+    {
+        if (Usuario::EsAdministrador()) {
+            Controlador::getInstance()->cerrarSesion();
+            return $this->blade->render('login');
+        } else {
+            $this->tarea->actualizarEstado("Realizada", $id);
+            return $this->blade->render('buscadorOP', ['id' => $_SESSION['usuario']['id_trabajador'], 'errores'=>[]]);
         }
     }
     public function cancelarTarea($id, $op)
@@ -224,8 +233,18 @@ class C_Tareas
             return $this->blade->render('login');
         } else {
             $this->tarea->actualizarEstado("Cancelada", $id);
-            $registros = $this->tarea->getTareasOperario($op);
-            return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $op]);
+            header('Location:tablaTareasOperario');
+            exit;
+        }
+    }
+    public function cancelarTareaBuscar($id)
+    {
+        if (Usuario::EsAdministrador()) {
+            Controlador::getInstance()->cerrarSesion();
+            return $this->blade->render('login');
+        } else {
+            $this->tarea->actualizarEstado("Cancelada", $id);  
+            return $this->blade->render('buscadorOP', ['errores'=>[], 'id' => $_SESSION["usuario"]["id_trabajador"]]);
         }
     }
     public function ShowConfirmar()

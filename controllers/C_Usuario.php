@@ -142,6 +142,9 @@ class C_Usuario
             $pagina = isset($_GET['page']) ? $_GET['page'] : 1;
             $desde = ($tareasPorPagina * $pagina) - $tareasPorPagina;
             $tareas = $this->tarea->RegistrosPaginadosOP($desde, $tareasPorPagina,$_SESSION["usuario"]["id_trabajador"]);
+            if(empty($tareas)){
+                $tareas=[];
+            }
             return $this->blade->render('lista_tareas_op', compact(
                 'totalTareas',
                 'tareasPorPagina',
@@ -154,5 +157,8 @@ class C_Usuario
             Controlador::getInstance()->cerrarSesion();
             return $this->blade->render('login');
         }
+    }
+    public function showConfirmarEliminar(){
+        
     }
 }

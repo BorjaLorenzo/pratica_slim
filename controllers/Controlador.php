@@ -137,7 +137,22 @@ class Controlador
         
     }
     public function Buscar(){
-        $registros=Tareas::buscarTodo(VPost('fechaI'),VPost('fechaF'),VPost('provincia'),VPost('valorI'),VPost('valorF'));
-        return $this->blade->render('lista_buscar', ['tareas' => $registros]);
+        $registros=Tareas::buscarTodo(VPost('op1'),VPost('vop1'),VPost('sop1'),VPost('op2'),VPost('vop2'),VPost('sop2'),VPost('op3'),VPost('vop3'),VPost('sop3'));
+        $variables=[
+            VPost('op1'),
+            VPost('vop1'),
+            VPost('sop1'),
+            VPost('op2'),
+            VPost('vop2'),
+            VPost('sop2'),
+            VPost('op3'),
+            VPost('vop3'),
+            VPost('sop3')
+        ];
+        if($_SESSION["usuario"]["rol"]=='operario'){
+            return $this->blade->render('lista_buscar_op', ['tareas' => $registros,'id'=>$_SESSION["usuario"]["id_trabajador"],'variables'=>$variables]);
+        }else{
+            return $this->blade->render('lista_buscar', ['tareas' => $registros]);
+        }
     }
 }

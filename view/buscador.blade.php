@@ -24,7 +24,6 @@
         </div>
         <div class="col">
             <label for="">Seccion: <select name="sop1" id="">
-                <option value="" selected></option>
                 <option value="id_operario">ID Operario</option>
                 <option value="nombre_contacto">Nombre</option>
                 <option value="apellidos_contacto">Apellidos</option>
@@ -58,7 +57,6 @@
         </div>
         <div class="col">
             <label for="">Seccion: <select name="sop2" id="">
-                <option value="" selected></option>
                 <option value="id_operario">ID Operario</option>
                 <option value="nombre_contacto">Nombre</option>
                 <option value="apellidos_contacto">Apellidos</option>
@@ -92,7 +90,6 @@
         </div>
         <div class="col">
             <label for="">Seccion: <select name="sop3" id="">
-                <option value="" selected></option>
                 <option value="id_operario">ID Operario</option>
                 <option value="nombre_contacto">Nombre</option>
                 <option value="apellidos_contacto">Apellidos</option>

@@ -16,7 +16,7 @@
             <tr>
                 <td>
                     <a href="<?=BASE_URL?>modificarUsuario?id_trabajador={{$usuario["id_trabajador"]}}" class="waves-effect waves-light btn-large">Modificar</a>
-                    <a href="<?=BASE_URL?>borrarUsuario?id_trabajador={{$usuario["id_trabajador"]}}" class="waves-effect waves-light btn-large">Eliminar</a>
+                    <a href="<?=BASE_URL?>confirmarEliminarUsuario?id_trabajador={{$usuario["id_trabajador"]}}" class="waves-effect waves-light btn-large">Eliminar</a>
                 </td>
                 <td>{{$usuario["id_trabajador"]}}</td>
                 <td>{{$usuario["nombre"]}}</td>
