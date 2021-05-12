@@ -55,8 +55,7 @@ $app->any('/menuADM', function (Request $req,  Response $res, $args = []) {
 });
 $app->any('/menuOP', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
-    $test=$req->getParam('id_operario');
-    return $res->getBody()->write(Controlador::getInstance()->ShowMenuOP($test));
+    return $res->getBody()->write(Controlador::getInstance()->ShowMenuOP());
 });
 $app->any('/borrarTarea', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
@@ -100,7 +99,7 @@ $app->any('/borrarUsuario', function (Request $req,  Response $res, $args = []) 
 });
 $app->any('/tablaTareasOperario', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();
-    return $res->getBody()->write(C_Usuario::getInstance()->showTablaOperarios());
+    return $res->getBody()->write(C_Tareas::getInstance()->showTablaOperarios());
 });
 $app->any('/realizarTarea', function (Request $req,  Response $res, $args = []) {
     Usuario::SalirSiNoDentro();

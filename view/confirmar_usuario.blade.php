@@ -4,8 +4,9 @@
     <input type="text" name="id_trabajador" value="{{$id}}" style="visibility: hidden">
     <div class="row">
         <div class="col">
-            <p>Desea eliminar el usuario {{$nombre}} {{$apellidos}} con ID -> {{$id}} ? <button class="btn waves-effect waves-light" type="submit" name="botonInicio">Confirmar<i class="material-icons right"></i></button></p>
+            <p>Desea eliminar el usuario <b> {{$nombre}} {{$apellidos}}</b> con ID -> <b> {{$id}} </b> ? <button class="btn waves-effect waves-light" type="submit" name="botonInicio">Confirmar<i class="material-icons right"></i></button></p>
         </div>
+        
     </div>
     
 </form>

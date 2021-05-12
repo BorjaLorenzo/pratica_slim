@@ -1,5 +1,22 @@
 <?php
 class Tareas{
+    /**
+     * Funcion que devuelve todas las tareas en funcion de unos criterios
+     * seleccionados en el buscador, se usa como parametros:
+     *                                  -op = opcion que el usuario escribe
+     *                                  -vop= valor comparativo seleccionado -> [>, =, <]
+     *                                  -sop= seccion seleccionada -> id_operario,nombre_contacto,fecha_inicio....
+     * @param [string] $op1
+     * @param [string] $vop1
+     * @param [string] $sop1
+     * @param [string] $op2
+     * @param [string] $vop2
+     * @param [string] $sop2
+     * @param [string] $op3
+     * @param [string] $vop3
+     * @param [string] $sop3
+     * @return void
+     */
     public static function buscarTodo($op1,$vop1,$sop1,$op2,$vop2,$sop2,$op3,$vop3,$sop3){
         $con=BaseDatos::getInstance()->Conexion();
         $op=$_SESSION["usuario"]["id_trabajador"];
@@ -17,6 +34,23 @@ class Tareas{
         }
         return $registros;
     }
+    /**
+     * Funcion para insertar una tarea en la bbdd
+     *
+     * @param [string] $id_operario
+     * @param [string] $nombre
+     * @param [string] $apellidos
+     * @param [string] $telefono
+     * @param [string] $descripcion
+     * @param [string] $email
+     * @param [string] $direccion
+     * @param [string] $poblacion
+     * @param [string] $codigoPostal
+     * @param [string] $provincia
+     * @param [string] $estado
+     * @param [string] $anotaciones_ANT
+     * @return void
+     */
     public function insertarTablaTarea($id_operario, $nombre, $apellidos, $telefono, $descripcion, $email, $direccion, $poblacion, $codigoPostal, $provincia, $estado, $anotaciones_ANT)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -38,6 +72,11 @@ class Tareas{
 
         $con->query($sql) or die("Error en algunos de los campos->>" . mysqli_error($con));
     }
+    /**
+     * Devuelve todas las teras de la bbdd
+     *
+     * @return void
+     */
     public function getArrayRegistrosTablaTarea()
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -52,6 +91,11 @@ class Tareas{
         }
         return $registros;
     }
+    /**
+     * devuelve la cantidad de registros que hay en la tabla tareas
+     *
+     * @return int 
+     */
     public function CantidadRegistros()
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -69,6 +113,13 @@ class Tareas{
             }
         }
     }
+    /**
+     * devuelve la cantidad de registros que hay en la tabla tareas
+     * asociadas con un operario, en este caso  pasamos su id por parametros
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function CantidadRegistrosOP($id)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -86,6 +137,15 @@ class Tareas{
             }
         }
     }
+    /**
+     * devuelve una serie de tareas entre 2 limites siendo 
+     * $limite1 el registro de inicio y siendo $limite2 la cantidad de registros
+     * desde $limite1
+     *
+     * @param [int] $limite1
+     * @param [int] $limite2
+     * @return void
+     */
     public function RegistrosPaginados($limite1, $limite2)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -106,6 +166,16 @@ class Tareas{
             }
         }
     }
+    /**
+     * devuelve una serie de tareas entre 2 limites siendo 
+     * $limite1 el registro de inicio y siendo $limite2 la cantidad de registros
+     * desde $limite1 asociados con un operario, en este caso pasamos su id por parametro
+     *
+     * @param [int] $limite1
+     * @param [int] $limite2
+     * @param [int] $id
+     * @return void
+     */
     public function RegistrosPaginadosOP($limite1, $limite2,$id)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -126,6 +196,12 @@ class Tareas{
             }
         }
     }
+    /**
+     * funcion que borra una tarea de la bbdd
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function BorrarTarea($id)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -134,10 +210,28 @@ class Tareas{
             return $con->connect_error;
         } else {
 
-            $sql = "DELETE FROM `tareas` where id=" . $id . ";";
+            $sql = "DELETE FROM `tareas` where id= $id ;";
             $con->query($sql);
         }
     }
+    /**
+     * funcion para modificar los datos de una tarea
+     *
+     * @param [int] $id
+     * @param [string] $id_operario
+     * @param [string] $nombre
+     * @param [string] $apellidos
+     * @param [string] $telefono
+     * @param [string] $descripcion
+     * @param [string] $email
+     * @param [string] $direccion
+     * @param [string] $poblacion
+     * @param [string] $codigoPostal
+     * @param [string] $provincia
+     * @param [string] $estado
+     * @param [string] $anotaciones_POST
+     * @return void
+     */
     public function ModificarTarea($id, $id_operario, $nombre, $apellidos, $telefono, $descripcion, $email, $direccion, $poblacion, $codigoPostal, $provincia, $estado, $anotaciones_POST)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -154,6 +248,12 @@ class Tareas{
         `anotaciones_POST`="' . $anotaciones_POST . '" WHERE `id`= "' . $id . '" ;';
         $con->query($sql);
     }
+    /**
+     * Devuelve una tarea pasandole su id por parametro
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function getTarea($id)
     {
         $con=BaseDatos::getInstance()->Conexion();
@@ -163,6 +263,12 @@ class Tareas{
         $fila = $resultado->fetch_assoc();
         return $fila;
     }
+    /**
+     * Devuelve todas las tareas de un trabajador pasandole su id por parametro
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function getTareasOperario($id){
         $con=BaseDatos::getInstance()->Conexion();
 
@@ -176,6 +282,14 @@ class Tareas{
         }
         return $registros;
     }
+    /**
+     * funcion que actualiza el estado de una tarea
+     * le pasamos por parametro el estado y el id de la tarea
+     *
+     * @param [string] $estado
+     * @param [int] $id
+     * @return void
+     */
     public function actualizarEstado($estado ,$id){
         $con=BaseDatos::getInstance()->Conexion();
 

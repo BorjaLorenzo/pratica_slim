@@ -35,10 +35,20 @@ class Controlador
     {
         return new self();
     }
+    /**
+     * funcion que muestra el login
+     *
+     * @return void
+     */
     public function verLogin()
     {
         return $this->blade->render('login');
     }
+    /**
+     * funcion que hace la comprobacion de usuarios en el login del inicio
+     *
+     * @return void
+     */
     public function CheckLogin()
     {
         if (!$_POST) {
@@ -55,6 +65,11 @@ class Controlador
             }
         }
     }
+    /**
+     * Muestra el menu de administradores
+     *
+     * @return void
+     */
     public function ShowMenuAdm()
     {
         if(Usuario::EsAdministrador()){
@@ -65,10 +80,15 @@ class Controlador
         }
         
     }
-    public function ShowMenuOP($id)
+    /**
+     * Muestra el menu de operarios
+     *
+     * @return void
+     */
+    public function ShowMenuOP()
     {
         if(!Usuario::EsAdministrador()){
-            return $this->blade->render('menu_op',['id'=>$id]);
+            return $this->blade->render('menu_op',['id'=>$_SESSION['usuario']['id_trabajador']]);
         }
         else{
             Controlador::getInstance()->cerrarSesion();
@@ -85,6 +105,11 @@ class Controlador
         } 
         
     }
+    /**
+     * funcion que se encarga de cambiar la contrasena de los operarios
+     *
+     * @return void
+     */
     public function cambiarPass(){
         if(Usuario::EsAdministrador()){
             Controlador::getInstance()->cerrarSesion();
@@ -107,7 +132,7 @@ class Controlador
         
     }
     /**
-     * Undocumented function
+     * funcion que se encarga de cerrar la sesion cuando un usuario cierre sesion
      *
      * @return void
      */
@@ -115,6 +140,11 @@ class Controlador
         Usuario::Logout();
         return $this->blade->render('login');
     }
+    /**
+     * muestra la vista del buscador de administrador
+     *
+     * @return void
+     */
     public function showBuscar(){
         if(Usuario::EsAdministrador()){
             return $this->blade->render('buscador',['errores'=>[]]);
@@ -126,6 +156,11 @@ class Controlador
         } 
         
     }
+    /**
+     * muestra la vista del buscador de operarios
+     *
+     * @return void
+     */
     public function showBuscarOP(){
         if(Usuario::EsAdministrador()){
             Controlador::getInstance()->cerrarSesion();
@@ -136,6 +171,12 @@ class Controlador
         } 
         
     }
+    /**
+     * funcion para buscar una tarea y devuelve la vista con las tareas encontradas
+     * en funcion de si el usuario es un administrador o un operario
+     *
+     * @return void
+     */
     public function Buscar(){
         $registros=Tareas::buscarTodo(VPost('op1'),VPost('vop1'),VPost('sop1'),VPost('op2'),VPost('vop2'),VPost('sop2'),VPost('op3'),VPost('vop3'),VPost('sop3'));
         $variables=[

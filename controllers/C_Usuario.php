@@ -35,6 +35,11 @@ class C_Usuario
     {
         return new self();
     }
+    /**
+     * funcion que muestra una vista con todos los usuarios registrados en la bbdd
+     *
+     * @return void
+     */
     public function ShowUsuarios()
     {
         if (Usuario::EsAdministrador()) {
@@ -45,6 +50,11 @@ class C_Usuario
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que muestra una vista para poder insertar un usuario
+     *
+     * @return void
+     */
     public function ShowInsertarUsuario()
     {
         if (Usuario::EsAdministrador()) {
@@ -54,6 +64,11 @@ class C_Usuario
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que filtra los errores del formulario e inserte un nuevo usuario en la bbdd
+     *
+     * @return void
+     */
     public function insertarUsuario()
     {
         if (Usuario::EsAdministrador()) {
@@ -79,16 +94,28 @@ class C_Usuario
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion a la que se le pasa por parametro el id de un usuario
+     * y muestra una vista con todos sus valores en un formulario
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function modificarUsuario($id)
     {
         if (Usuario::EsAdministrador()) {
-            $usuario = $this->usuario->getUsuario($id);
+            $usuario = Usuario::getUser($id);
             return $this->blade->render('modificarUsuario', ['usuario' => $usuario, 'id' => $id, 'errores' => []]);
         } else {
             Controlador::getInstance()->cerrarSesion();
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que filtra los errores del formulario e inserta los cambios en del usuario en la bbdd
+     *
+     * @return void
+     */
     public function usuarioModificado()
     {
         if (Usuario::EsAdministrador()) {
@@ -119,6 +146,12 @@ class C_Usuario
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que elimina un usuario pasandole su id por parametro
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function eliminarUsuario($id)
     {
         if (Usuario::EsAdministrador()) {
@@ -130,35 +163,13 @@ class C_Usuario
             return $this->blade->render('login');
         }
     }
-    public function showTablaOperarios()
-    {
-        if (!Usuario::EsAdministrador()) {
-            // $registros = $this->tarea->getTareasOperario($id);
-            // return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $id]);
-
-            $totalTareas = intval($this->tarea->CantidadRegistrosOP($_SESSION["usuario"]["id_trabajador"]));
-            $tareasPorPagina = 5;
-            $id=$_SESSION["usuario"]["id_trabajador"];
-            $pagina = isset($_GET['page']) ? $_GET['page'] : 1;
-            $desde = ($tareasPorPagina * $pagina) - $tareasPorPagina;
-            $tareas = $this->tarea->RegistrosPaginadosOP($desde, $tareasPorPagina,$_SESSION["usuario"]["id_trabajador"]);
-            if(empty($tareas)){
-                $tareas=[];
-            }
-            return $this->blade->render('lista_tareas_op', compact(
-                'totalTareas',
-                'tareasPorPagina',
-                'pagina',
-                'desde',
-                'tareas',
-                'id'
-            ));
-        } else {
-            Controlador::getInstance()->cerrarSesion();
-            return $this->blade->render('login');
-        }
-    }
+    /**
+     * muestra un vista de comprobacion de que se desea eliminar un usuario
+     *
+     * @return void
+     */
     public function showConfirmarEliminar(){
-        
+        $usuario=Usuario::getUser(VGet('id_trabajador'));
+        return $this->blade->render('confirmar_usuario',['id'=>$usuario['id_trabajador'],'nombre'=> $usuario['nombre'] , 'apellidos'=>$usuario['apellidos']]);
     }
 }

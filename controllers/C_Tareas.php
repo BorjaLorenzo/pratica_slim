@@ -32,6 +32,11 @@ class C_Tareas
     {
         return new self();
     }
+    /**
+     * funcion que filtra los errores del formulario e inserta una tarea en la bbdd
+     *
+     * @return void
+     */
     public function CheckTarea()
     {
         if (Usuario::EsAdministrador()) {
@@ -81,6 +86,11 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que muestra una vista con todas las tareas
+     *
+     * @return void
+     */
     public function ShowTabla()
     {
         if (Usuario::EsAdministrador()) {
@@ -102,6 +112,11 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que muestra una vista con formulario para insertar una tarea en la bbdd
+     *
+     * @return void
+     */
     public function ShowInsertarTarea()
     {
         if (Usuario::EsAdministrador()) {
@@ -111,15 +126,12 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
-    public function MenuBorrar()
-    {
-        if (Usuario::EsAdministrador()) {
-            return $this->blade->render('menu_borrar_tarea', ['exito' => '']);
-        } else {
-            Controlador::getInstance()->cerrarSesion();
-            return $this->blade->render('login');
-        }
-    }
+    /**
+     * funcion que borra una tarea, le pasamos el id de la tarea por parametro
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function borrarTarea($id)
     {
         if (Usuario::EsAdministrador()) {
@@ -131,6 +143,13 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
+    /**
+     * muestra una vista con un formulario con todos los datos de la tarea que tiene el id
+     * que pasamos por parametro
+     *
+     * @param [type] $test
+     * @return void
+     */
     public function modificarTarea($test)
     {
         if (Usuario::EsAdministrador()) {
@@ -141,6 +160,11 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
+    /**
+     * funcion que filtra los errores del formulario e inserta los cambios realizados de una tarea
+     *
+     * @return void
+     */
     public function tareamodificada()
     {
         if (Usuario::EsAdministrador()) {
@@ -205,7 +229,13 @@ class C_Tareas
             return $this->blade->render('login');
         }
     }
-    public function realizarTarea($id, $op)
+    /**
+     * funcion que se encarga de cambiar el estado de la tarea a "realizada"
+     *
+     * @param [int] $id
+     * @return void
+     */
+    public function realizarTarea($id)
     {
         if (Usuario::EsAdministrador()) {
             Controlador::getInstance()->cerrarSesion();
@@ -216,6 +246,13 @@ class C_Tareas
             exit;
         }
     }
+    /**
+     * funcion que se encarga de cambiar el estado de la tarea a "realizada"
+     * en la vista que parace despues de usar el buscador
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function realizarTareaBuscar($id)
     {
         if (Usuario::EsAdministrador()) {
@@ -226,7 +263,13 @@ class C_Tareas
             return $this->blade->render('buscadorOP', ['id' => $_SESSION['usuario']['id_trabajador'], 'errores'=>[]]);
         }
     }
-    public function cancelarTarea($id, $op)
+    /**
+     * funcion que se encarga de cambiar el estado de la tarea a "cancelada"
+     *
+     * @param [int] $id
+     * @return void
+     */
+    public function cancelarTarea($id)
     {
         if (Usuario::EsAdministrador()) {
             Controlador::getInstance()->cerrarSesion();
@@ -237,6 +280,13 @@ class C_Tareas
             exit;
         }
     }
+    /**
+     * funcion que se encarga de cambiar el estado de la tarea a "cancelada"
+     * en la vista que parace despues de usar el buscador
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function cancelarTareaBuscar($id)
     {
         if (Usuario::EsAdministrador()) {
@@ -247,8 +297,47 @@ class C_Tareas
             return $this->blade->render('buscadorOP', ['errores'=>[], 'id' => $_SESSION["usuario"]["id_trabajador"]]);
         }
     }
+    /**
+     * muestra un vista de comprobacion antes de eliminar una tarea
+     *
+     * @return void
+     */
     public function ShowConfirmar()
     {
         return $this->blade->render('confirmar_eliminar', ['id_tarea' => $_GET['id_tarea']]);
     }
+    /**
+     * muestra una vista con todas las tareas del operario
+     *
+     * @return void
+     */
+    public function showTablaOperarios()
+    {
+        if (!Usuario::EsAdministrador()) {
+            // $registros = $this->tarea->getTareasOperario($id);
+            // return $this->blade->render('lista_tareas_op', ['tareas' => $registros, 'id' => $id]);
+
+            $totalTareas = intval($this->tarea->CantidadRegistrosOP($_SESSION["usuario"]["id_trabajador"]));
+            $tareasPorPagina = 5;
+            $id=$_SESSION["usuario"]["id_trabajador"];
+            $pagina = isset($_GET['page']) ? $_GET['page'] : 1;
+            $desde = ($tareasPorPagina * $pagina) - $tareasPorPagina;
+            $tareas = $this->tarea->RegistrosPaginadosOP($desde, $tareasPorPagina,$_SESSION["usuario"]["id_trabajador"]);
+            if(empty($tareas)){
+                $tareas=[];
+            }
+            return $this->blade->render('lista_tareas_op', compact(
+                'totalTareas',
+                'tareasPorPagina',
+                'pagina',
+                'desde',
+                'tareas',
+                'id'
+            ));
+        } else {
+            Controlador::getInstance()->cerrarSesion();
+            return $this->blade->render('login');
+        }
+    }
+    
 }

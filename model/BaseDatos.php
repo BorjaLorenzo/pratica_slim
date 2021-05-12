@@ -29,7 +29,7 @@ class BaseDatos
         
         return self::$singleton = new self();
     }
-
+    
     public function Conexion(){
         return $this->con;
     }
